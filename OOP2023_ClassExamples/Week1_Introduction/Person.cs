@@ -24,7 +24,7 @@ namespace Week1_Introduction
             createdOn =  DateTime.Now;
         }
 
-
+      
         public string ChangePassword(string newPassword, string confirmationPassword)
         {
             if (newPassword.Length < 6)
@@ -89,21 +89,15 @@ namespace Week1_Introduction
         }
 
         private string firstName; //Joe
-         
-        private string lastName;
+
+        public string LastName { get; set; }
 
         public string FullName
         {
-            get { return FirstName + "" + lastName; }
+            get { return FirstName + " " + LastName; }
         }
 
         public Department Department { get; set; }
-
-
-
-
-
-
-
+        
     }
 }

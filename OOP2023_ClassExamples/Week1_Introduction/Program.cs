@@ -29,22 +29,57 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+           Person p = new Person(); //Person is the class name
+                                    //p is the object name
+                                    //data can be stored in the object i.e. p
 
-            Person p = new Person(); //Person is the class name
-                                     //p is the object name
-                                     //data can be stored in the object i.e. p
+            Console.WriteLine("Type in your first name:");
+            p.FirstName = Console.ReadLine();
+
+            Console.WriteLine("Type in your last name:");
+            p.LastName = Console.ReadLine();
+
+            Console.WriteLine($"Your full name: {p.FullName}");
 
 
-            //intellisense
+            Vehicle v = new Vehicle();
+            Console.WriteLine("Input vehicle Make");
+            v.Make = Console.ReadLine();
 
-            Department d = new Department();
-            d.ID = 1;
-            d.Name = "ICT";
+            Console.WriteLine("Input vehicle model");
+            v.Model = Console.ReadLine();
+
+            Console.WriteLine("Input vehicle year");
+            v.Year = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("1. Petrol");
+            Console.WriteLine("2. Diesel");
+            Console.WriteLine("3. Hybrid");
+            Console.WriteLine("4. Electric");
+             
+           int engineChoice = Convert.ToInt32(Console.ReadLine());
+            switch(engineChoice)
+            {
+                case 1:
+                    v.Engine = Engine.Petrol; break;
+                case 2:
+                    v.Engine = Engine.Diesel; break; 
+            }
+
+            /* v.Engine = (Engine) Enum.Parse(typeof(Engine), Console.ReadLine());*/
+
+            v.Owners.Add(p);
+
+            Console.WriteLine(); //skips a line
+
+            Console.WriteLine($"Vehicle engine is: {v.Engine}");
+            Console.WriteLine($"Age of car is {v.FindAgeOfCar()}");
+            Console.WriteLine($"List of Owners \n {v.ListCarOwners()}");
 
 
-            p.Department = d;
-
+            Console.WriteLine();
+            Console.WriteLine("Press any key to terminate application");
+            Console.ReadKey();
           
         }
 
