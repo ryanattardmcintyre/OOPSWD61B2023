@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Week1_Introduction", "Week1_Introduction\Week1_Introduction.csproj", "{3BB24475-EE73-4287-9563-316B0A32F96A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Week1_Introduction", "Week1_Introduction\Week1_Introduction.csproj", "{3BB24475-EE73-4287-9563-316B0A32F96A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Week3_Inheritance", "Week3_Inheritance\Week3_Inheritance.csproj", "{26B30D3B-7F22-4583-BBA7-8390DC15F3B2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{3BB24475-EE73-4287-9563-316B0A32F96A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3BB24475-EE73-4287-9563-316B0A32F96A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3BB24475-EE73-4287-9563-316B0A32F96A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26B30D3B-7F22-4583-BBA7-8390DC15F3B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26B30D3B-7F22-4583-BBA7-8390DC15F3B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26B30D3B-7F22-4583-BBA7-8390DC15F3B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26B30D3B-7F22-4583-BBA7-8390DC15F3B2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
