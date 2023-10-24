@@ -8,6 +8,15 @@ namespace Week3_Inheritance_Example1
 {
     public class Current : Account
     {
+        public Current() { }
+
+        public Current(string iBAN, string idCard, double balance, DateTime? openedDate,
+            int chequeBookNo)
+            :base(iBAN, idCard, balance, openedDate)
+        {
+            ChequeBookNo = chequeBookNo;
+        }
+
         public int ChequeBookNo { get; set; }
 
         public double Withdraw(double amount)
