@@ -19,10 +19,19 @@ namespace Week3_Inheritance_Example1
             int choice = 0; 
             do
             {
+                //=================== main menu =========================
+                Console.Clear();
                 Console.WriteLine("1. Open Account");
                 Console.WriteLine("2. Search Account");
                 Console.WriteLine("3. Close Account");
                 Console.WriteLine("4. Quit application");
+
+                //HW
+                Console.WriteLine("5. Deposit");
+                Console.WriteLine("6. Transfer");
+                Console.WriteLine("7. Withdraw");
+                Console.WriteLine("8. Calculate Interest");
+
                 choice = Convert.ToInt32(Console.ReadLine());
 
                 switch(choice)
@@ -97,15 +106,92 @@ namespace Week3_Inheritance_Example1
 
                         break;
 
-                    case 2:
+                    case 2: //Search
+
+                        Console.WriteLine("Input Iban");
+                        string iban = Console.ReadLine();
+                        //short version
+                        var myFoundAccount = myAccounts.SingleOrDefault(a => a.IBAN == iban);
+
+                        if (myFoundAccount == null)
+                        {
+                            Console.WriteLine("Account not found");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"IdCard: {myFoundAccount.IdCard}, " +
+                                $"Balance: {myFoundAccount.Balance}, Opened Date: {myFoundAccount.OpenedDate.ToString("dd/MM/yyyy")},");
+
+                            if (myFoundAccount.ClosedDate != null)
+                            {
+                                Console.WriteLine($"Closed date: {myFoundAccount.ClosedDate.Value.ToShortDateString()}");
+                            }
+                              
+                         
+
+                        }
+                        Console.WriteLine("Press a key to go back to main menu...");
+                        Console.ReadKey();
+                        //long version
+                        /*foreach (var a in myAccounts)
+                        {
+                            if(a.IBAN == iban)
+                            {
+                                //display the details
+                                //stop the loop using break;
+                            }
+                        }*/
+
                         break;
 
-                    case 3:
+                    case 3: //close account
+                        Console.WriteLine("Input Iban");
+                        string iban2 = Console.ReadLine();
+                        //short version
+                        var myFoundAccount2 = myAccounts.SingleOrDefault(a => a.IBAN == iban2);
+                        if (myFoundAccount2 == null)
+                        {
+                            Console.WriteLine("Account not found");
+                        }
+                        else
+                        {
+                            myFoundAccount2.Active = false;
+                            myFoundAccount2.ClosedDate = DateTime.Now;
+                            Console.WriteLine("Account closed!");
+                        }
+                        Console.WriteLine("Press a key to go back to main menu...");
+                        Console.ReadKey();
+
                         break;
 
                     case 4:
                         Console.WriteLine("Bye bye! Press a key to continue...");
                         Console.ReadKey();
+                        break;
+
+
+                    case 7: //Withdraw
+
+                        Console.WriteLine("Input Iban");
+                        string iban3 = Console.ReadLine();
+                        //short version
+                        var myFoundAccount3 = myAccounts.SingleOrDefault(a => a.IBAN == iban3);
+                        if (myFoundAccount3 == null)
+                        {
+                            Console.WriteLine("Account not found");
+                        }
+                        else
+                        {
+                            if (myFoundAccount3.GetType() == typeof(Savings) || myFoundAccount3.GetType() == typeof(Current))
+                            {
+                                //allowed to withraw
+                            }
+                            else
+                            {
+                                Console.WriteLine("Withrawal denied");
+                            }
+                        }
+
                         break;
                 }
 
