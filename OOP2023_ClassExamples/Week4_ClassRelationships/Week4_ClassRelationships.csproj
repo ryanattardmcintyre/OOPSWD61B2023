@@ -43,8 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="House.cs" />
-    <Compile Include="Person.cs" />
+    <Compile Include="Example1\House.cs" />
+    <Compile Include="Example1\Person.cs" />
+    <Compile Include="Example2\Account.cs" />
+    <Compile Include="Example2\Bank.cs" />
+    <Compile Include="Example2\Person.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

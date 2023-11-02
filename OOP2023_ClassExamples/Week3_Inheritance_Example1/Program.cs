@@ -169,11 +169,78 @@ namespace Week3_Inheritance_Example1
                         Console.ReadKey();
                         break;
 
+                    case 5: //deposit
+                        Console.WriteLine("Input Iban of the account you would like to deposit in:");
+                        string iban4 = Console.ReadLine();
 
-                    case 7: //Withdraw
+                        Console.WriteLine("Input the amount to depopsit: ");
+                        double amount = Convert.ToDouble(Console.ReadLine());
+
+                        var myFoundAccount4 = myAccounts.SingleOrDefault(a => a.IBAN == iban4);
+                        if (myFoundAccount4 == null)
+                        {
+                            Console.WriteLine("Account not found");
+                        }
+                        else
+                        {
+                            try
+                            {
+                                var updatedBalance = myFoundAccount4.Deposit(amount);
+                                Console.WriteLine("Updated balance now is: " + updatedBalance);
+                            }
+                            catch(Exception ex) { Console.WriteLine(ex.Message); }
+
+                        }
+                        Console.WriteLine("Press a key to go back to main menu...");
+                        Console.ReadKey();
+                        break;
+
+                        case 6:
+
+                        Console.WriteLine("Input source Iban");
+                        string iban_source = Console.ReadLine();
+
+                        Console.WriteLine("Input destination Iban");
+                        string iban_destination = Console.ReadLine();
+
+                        Console.WriteLine("Input the amount to transfer: ");
+                        double amountToTransfer = Convert.ToDouble(Console.ReadLine());
+
+
+                        //short version
+                        var myFoundAccount_source = myAccounts.SingleOrDefault(a => a.IBAN == iban_source);
+                        var myFoundAccount_destination = myAccounts.SingleOrDefault(a => a.IBAN == iban_destination);
+                        if (myFoundAccount_source == null || myFoundAccount_destination == null)
+                        {
+                            Console.WriteLine("One of the accounts was not found");
+                        }
+                        else
+                        {
+                            if (myFoundAccount_source.GetType() == typeof(Savings) || myFoundAccount_source.GetType() == typeof(Current))
+                            {
+                                //allowed to transfer
+                                ((Current)myFoundAccount_source).Transfer(myFoundAccount_destination, amountToTransfer);
+                                Console.WriteLine("Transfer executed");
+                            }
+                            else
+                            {
+                                Console.WriteLine("Withrawal denied");
+                            }
+                        }
+
+                        Console.WriteLine("Press a key to continue...");
+                        Console.ReadKey();
+
+                        break;
+                        case 7: //Withdraw
 
                         Console.WriteLine("Input Iban");
                         string iban3 = Console.ReadLine();
+
+                        Console.WriteLine("Input the amount to withdraw: ");
+                        double amountToWithdraw = Convert.ToDouble(Console.ReadLine());
+
+
                         //short version
                         var myFoundAccount3 = myAccounts.SingleOrDefault(a => a.IBAN == iban3);
                         if (myFoundAccount3 == null)
@@ -185,12 +252,48 @@ namespace Week3_Inheritance_Example1
                             if (myFoundAccount3.GetType() == typeof(Savings) || myFoundAccount3.GetType() == typeof(Current))
                             {
                                 //allowed to withraw
+                                try
+                                {
+                                    ((Current)myFoundAccount3).Withdraw(amountToWithdraw);
+                                }
+                                catch(Exception ex)
+                                {
+                                    Console.WriteLine(ex.Message);
+                                }
                             }
                             else
                             {
                                 Console.WriteLine("Withrawal denied");
                             }
                         }
+                        Console.WriteLine("Press a key to continue...");
+                        Console.ReadKey();
+                        break;
+
+
+                        case 8:
+                        Console.WriteLine("Input Iban");
+                        string iban5 = Console.ReadLine();
+                        //short version
+                        var myFoundAccount5 = myAccounts.SingleOrDefault(a => a.IBAN == iban5);
+                        if (myFoundAccount5 == null)
+                        {
+                            Console.WriteLine("Account not found");
+                        }
+                        else
+                        {
+                            if (myFoundAccount5.GetType() == typeof(Savings))
+                            {
+                                
+                                Console.WriteLine("Interest: " + ((Savings)myFoundAccount5).CalculateInterest());
+                            }
+                            else
+                            {
+                                Console.WriteLine("No Interest to calculate");
+                            }
+                        }
+                        Console.WriteLine("Press a key to continue...");
+                        Console.ReadKey();
 
                         break;
                 }

@@ -16,7 +16,7 @@ namespace Week3_Inheritance_Example1
 
         public double CalculateMonthlyRepayment()
         {
-            return (((Interest / 100) * Balance) / 12) + (InitialLoanAmount/Months) ;
+            return (((Interest / 100) * Math.Abs(Balance)) / 12) + (Math.Abs(InitialLoanAmount)/Months) ;
         }
 
         public override double Deposit(double amount) 
@@ -28,7 +28,9 @@ namespace Week3_Inheritance_Example1
             }
             else
             {
-                if (amount < CalculateMonthlyRepayment())
+                var monthlyRepayment = CalculateMonthlyRepayment();
+
+                if (amount < monthlyRepayment)
                 {
                     throw new Exception("Amount is less than the expected monthly repayment");
                 }
