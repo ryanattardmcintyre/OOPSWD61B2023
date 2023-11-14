@@ -6,7 +6,7 @@ using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Week5_Interfaces_AbstractClasses
+namespace Week5_Interfaces_AbstractClasses.Example3
 {
     public class PersonList : IList, IEqualityComparer
     {
@@ -65,7 +65,7 @@ namespace Week5_Interfaces_AbstractClasses
             throw new NotImplementedException();
         }
 
-  
+
 
         public int GetHashCode(object obj)
         {
@@ -77,7 +77,7 @@ namespace Week5_Interfaces_AbstractClasses
             throw new NotImplementedException();
         }
 
-       
+
 
         public int IndexOf(object? value)
         {

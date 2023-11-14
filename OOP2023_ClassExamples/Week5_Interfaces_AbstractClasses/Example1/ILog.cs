@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Week5_Interfaces_AbstractClasses
+namespace Week5_Interfaces_AbstractClasses.Example1
 {
     //log: consists of a sentence or a phrase which describes a state/something that's happening within the application
     public interface ILog
