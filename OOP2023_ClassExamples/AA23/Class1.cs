@@ -1,21 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Security;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace AA23
 {
-    public class Circle
+
+    public abstract class Point
     {
         public int X { get; set; }
         public int Y { get; set; }
+        protected Point(int x, int y)
+        { X = x; Y = y; }
+    }
+    public class Circle: Point
+    {
+       
         public double Radius { get; set; }
 
-        public Circle(int x, int y, double radius)
+        public Circle(int x, int y, double radius): base(x,y)
         {
-            X = x;
-            Y = y;
+            
             Radius = radius;
         }
     }

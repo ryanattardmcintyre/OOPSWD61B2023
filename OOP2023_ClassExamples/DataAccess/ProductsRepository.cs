@@ -21,27 +21,44 @@ namespace DataAccess
         /// </summary>
         /// <returns></returns>
         public IQueryable<Product> GetProducts() { 
+            
+
+            //notation: entity-models
+            //return Context.Products.AsQueryable(); //gets the entire list of products
+
+            //notation: linq
             //Select * From Products
-
-            return Context.Products.AsQueryable(); //gets the entire list of products
-
-
-
+            var list =  from product in Context.Products
+                        //join category in Context.Categories 
+                        //on product.CategoryFk equals category.Id
+                        select product;
+            return list.AsQueryable();
         }
 
-        public Product GetProductById(int id) { 
+        public Product GetProductById(int id) {
 
             //Select Top 1 Id, Name, Price From Products Where Id == $id
+            //if no match , this method will return a null
+            //return GetProducts().SingleOrDefault(p => p.Id == id);
 
-            return GetProducts().SingleOrDefault(p => p.Id == id);
-        
+            var list = from product in Context.Products
+                       where product.Id == id
+                       select product;
+            return list.FirstOrDefault();
+
         }
 
         public IQueryable<Product> GetProducts(string keyword) { 
             //Select * From Products Where Name like '%$keyword%'
 
-        return GetProducts().Where(p => p.Name.Contains(keyword)).OrderByDescending(x=>x.Price);
-        
+          //  return GetProducts().Where(p => p.Name.StartsWith(keyword)).OrderByDescending(x=>x.Price);
+
+            var list = from product in Context.Products
+                       where product.Name.StartsWith(keyword)
+                       orderby product.Price descending
+                       select product;
+            return list.AsQueryable();
+
         }
 
         public void AddProduct(Product product) { 
@@ -51,9 +68,21 @@ namespace DataAccess
 
         }
 
-        public void DeleteProduct(Product product) { }  
+        public void DeleteProduct(Product product) {
+            Context.Products.Remove(product);
+            Context.SaveChanges();
+        }  
 
-        public void UpdateProduct(Product product) { }
+        public void UpdateProduct(Product product) {
+
+            var originalProduct = GetProductById(product.Id);
+            originalProduct.Name = product.Name;
+            originalProduct.Price = product.Price;
+            originalProduct.CategoryFk = product.CategoryFk;
+
+            Context.SaveChanges();
+        
+        }
 
       
 
