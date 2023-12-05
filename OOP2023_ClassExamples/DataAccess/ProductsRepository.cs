@@ -13,6 +13,9 @@ namespace DataAccess
 
 
 
+       
+
+
         //List -> it makes a call to the database immediately
         //IQueryable -> it postpones the call to the database until you decide
 
@@ -54,7 +57,7 @@ namespace DataAccess
           //  return GetProducts().Where(p => p.Name.StartsWith(keyword)).OrderByDescending(x=>x.Price);
 
             var list = from product in Context.Products
-                       where product.Name.StartsWith(keyword)
+                       where product.Name.Contains(keyword)
                        orderby product.Price descending
                        select product;
             return list.AsQueryable();
