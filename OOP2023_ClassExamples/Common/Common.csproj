@@ -54,6 +54,8 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="CategorySummaryViewModel.cs" />
+    <Compile Include="Feature8ViewModel.cs" />
+    <Compile Include="Feature9ViewModel.cs" />
     <Compile Include="Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

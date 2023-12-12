@@ -15,6 +15,7 @@ namespace Presentation
             //idea: to declare and instantiate productsRepository ONCE and use it wherever or whenever i need it, keeping ONE instance in memory
             ProductsRepository productsRepository = new ProductsRepository();
             CategoriesRepository categoriesRepository = new CategoriesRepository();
+            OrdersRepository ordersRepository = new OrdersRepository();
 
             int choice = 0;
             do
@@ -27,6 +28,11 @@ namespace Presentation
                 Console.WriteLine("5. Delete a Product");
                 Console.WriteLine("6. Update Product");
                 Console.WriteLine("7. List Categories With No. of Products");
+
+                Console.WriteLine("8. List the no. of paid or not paid orders");
+                Console.WriteLine("9. List the no. of orders for every product");
+                Console.WriteLine("10. List the no. of orders for every category");
+                Console.WriteLine("11. List the total price for every order per category");
 
 
                 Console.WriteLine("----------------------------------------");
@@ -183,6 +189,51 @@ namespace Presentation
                         Console.WriteLine("Hit a key to continue...");
                         Console.ReadKey();
                         break;
+
+
+                    case 8:
+
+                        var unpaidPaidOrders = ordersRepository.GetPaidOrUnpaidNoOfOrders();
+
+                        Console.WriteLine("Status \t No. Of Orders");
+                        foreach (var item in unpaidPaidOrders)
+                        {
+                            Console.WriteLine($"{item.Label} \t {item.TotalOrders}");
+                        }
+                        Console.WriteLine();
+                        Console.WriteLine("Hit a key to continue...");
+                        Console.ReadKey();
+                        break;
+
+                    case 9:
+
+                        var productsAndOrders = ordersRepository.GetNoOfOrdersForProducts();
+
+                        Console.WriteLine("Id \t Name \t\t No. Of Orders In Which Product is Included");
+                        foreach (var item in productsAndOrders)
+                        {
+                            Console.WriteLine($"{item.Product.Id} \t {item.Product.Name} \t\t {item.TotalOrdersForProduct}");
+                        }
+                        Console.WriteLine();
+                        Console.WriteLine("Hit a key to continue...");
+                        Console.ReadKey();
+                        break;
+
+                    case 10:
+
+                        var categoriesAndOrders = ordersRepository.GetTotalOrdersPerCategory();
+
+                        Console.WriteLine("Id \t Name \t\t No. Of Orders Per Category");
+                        foreach (var item in categoriesAndOrders)
+                        {
+                            Console.WriteLine($"{item.Category.Id} \t {item.Category.Name} \t\t {item.TotalNoOfProducts}");
+                        }
+                        Console.WriteLine();
+                        Console.WriteLine("Hit a key to continue...");
+                        Console.ReadKey();
+                        break;
+
+
 
 
                     default:
