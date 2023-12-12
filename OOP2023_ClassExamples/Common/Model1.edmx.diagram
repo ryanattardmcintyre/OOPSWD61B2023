@@ -8,7 +8,7 @@
         <EntityTypeShape EntityType="ShoppingCartOOPModel.Category" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="ShoppingCartOOPModel.Product" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
         <AssociationConnector Association="ShoppingCartOOPModel.FK_Products_Categories" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="ShoppingCartOOPModel.Order" Width="1.5" PointX="5.25" PointY="0.875" />
+        <EntityTypeShape EntityType="ShoppingCartOOPModel.Order" Width="1.5" PointX="7.5" PointY="0.875" />
         <AssociationConnector Association="ShoppingCartOOPModel.FK_Orders_Products" />
       </Diagram>
     </edmx:Diagrams>
