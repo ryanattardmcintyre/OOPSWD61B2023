@@ -27,8 +27,8 @@ namespace Presentation
                 Console.WriteLine("4. Add a Product");
                 Console.WriteLine("5. Delete a Product");
                 Console.WriteLine("6. Update Product");
+               
                 Console.WriteLine("7. List Categories With No. of Products");
-
                 Console.WriteLine("8. List the no. of paid or not paid orders");
                 Console.WriteLine("9. List the no. of orders for every product");
                 Console.WriteLine("10. List the no. of orders for every category");
@@ -176,6 +176,85 @@ namespace Presentation
 
                         break;
 
+                    case 5:
+
+                        ListProducts(productsRepository.GetProducts());
+                        Console.WriteLine("-------------------------------------");
+                        Console.WriteLine("Input id of product to be deleted:");
+                        int tempIdToDelete = Convert.ToInt32(Console.ReadLine());
+
+
+                        var productToBeDeleted = productsRepository.GetProductById(tempIdToDelete);
+                        if (productToBeDeleted == null)
+                        {
+                            Console.WriteLine("Product does not exist");
+                        }
+                        else
+                        {
+
+                            if (productToBeDeleted.Orders.Count > 0)
+                            {
+                                Console.WriteLine("Product cannot be deleted because it has already been bought");
+                            }
+                            else
+                            {
+                                productsRepository.DeleteProduct(productToBeDeleted);
+                                Console.WriteLine("Product was deleted successfully from the database");
+                            }
+                        }
+
+                        Console.WriteLine("Hit a key to continue...");
+                        Console.ReadKey();
+
+                        break;
+
+
+                    case 6:
+                        ListProducts(productsRepository.GetProducts());
+                        Console.WriteLine("-------------------------------------");
+                        Console.WriteLine("Input id of product to be updated:");
+                        int tempIdToUpdate = Convert.ToInt32(Console.ReadLine());
+
+
+                        var productToBeUpdated = productsRepository.GetProductById(tempIdToUpdate);
+                        if (productToBeUpdated == null)
+                        {
+                            Console.WriteLine("Product does not exist");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Input a new name: ");
+                            productToBeUpdated.Name = Console.ReadLine();
+
+                            Console.WriteLine("Input a new price: ");
+                            productToBeUpdated.Price = Convert.ToDecimal(Console.ReadLine());
+
+                            var myCategories2 = categoriesRepository.GetCategories();
+                            Console.WriteLine();
+                            foreach (var category in myCategories2)
+                            {
+                                Console.WriteLine($"{category.Id}. {category.Name}");
+                            }
+                            Console.WriteLine();
+
+                            Console.WriteLine("Input Category Id [the number next to the category name]: ");
+                            productToBeUpdated.CategoryFk = Convert.ToInt32(Console.ReadLine());
+
+                            productsRepository.UpdateProduct(productToBeUpdated);
+
+
+                            Console.WriteLine("Product was update successfully from the database");
+                             
+                        }
+
+                        Console.WriteLine("Hit a key to continue...");
+                        Console.ReadKey();
+
+
+                        break;
+
+
+
                     case 7:
 
                         var mySummary = categoriesRepository.GetCategoriesSummaries();
@@ -227,6 +306,20 @@ namespace Presentation
                         foreach (var item in categoriesAndOrders)
                         {
                             Console.WriteLine($"{item.Category.Id} \t {item.Category.Name} \t\t {item.TotalNoOfProducts}");
+                        }
+                        Console.WriteLine();
+                        Console.WriteLine("Hit a key to continue...");
+                        Console.ReadKey();
+                        break;
+
+                    case 11:
+
+                        var sumsOfCategories = ordersRepository.GetTotalSumOfOrdersPerCategory();
+
+                        Console.WriteLine("Id \t Name \t\t No. Of Orders Per Category\t\tTotal Price");
+                        foreach (var item in sumsOfCategories)
+                        {
+                            Console.WriteLine($"{item.Category.Id} \t {item.Category.Name} \t\t {item.TotalOrdersPerCategory}\t\t {item.TotalPriceForAllOrdersInCategory}");
                         }
                         Console.WriteLine();
                         Console.WriteLine("Hit a key to continue...");

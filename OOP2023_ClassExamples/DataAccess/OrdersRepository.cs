@@ -108,5 +108,27 @@ namespace DataAccess
             return list;
                       
         }
+
+
+        public IQueryable<Feature11ViewModel> GetTotalSumOfOrdersPerCategory()
+        {
+            
+
+            var list = from category in Context.Categories
+                       group category by category into categoryGroup
+                       select new Feature11ViewModel()
+                       {
+                           Category = categoryGroup.Key,
+                           TotalOrdersPerCategory = categoryGroup.Key.Products.Count(x => x.Orders.Count > 0),
+                           TotalPriceForAllOrdersInCategory =  
+                            categoryGroup.Key.Products.Where(x => x.Orders.Count > 0).Sum(x=> x.Price)
+                            == null? 0
+                            : 
+                           categoryGroup.Key.Products.Where(x => x.Orders.Count > 0).ToList().Sum(x => x.Orders.Sum(y=>y.Qty)* x.Price) 
+                       };
+
+            return list; 
+
+        }
     }
 }
